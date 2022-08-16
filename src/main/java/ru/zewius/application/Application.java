@@ -23,8 +23,6 @@ public class Application {
 
             String answer = scanner.next();
 
-            System.out.println(answer);
-
             while (!answer.equals("!quit")) {
                 Long startSearchTime = System.currentTimeMillis();
                 data.getKeysByPrefix(answer);
