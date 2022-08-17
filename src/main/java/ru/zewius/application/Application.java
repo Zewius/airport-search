@@ -15,22 +15,21 @@ public class Application {
     public static void main(String[] args) {
         try {
             Data data = new Data();
-            data.buildAutocomplete(CSV_TABLE_PATH, Integer.parseInt(args[0]));
-
             Scanner scanner = new Scanner(System.in);
 
-            System.out.print("Введите строку: ");
+            data.buildAutocomplete(CSV_TABLE_PATH, Integer.parseInt(args[0]));
 
-            String answer = scanner.next();
+            System.out.print("Введите строку: ");
+            String answer = scanner.nextLine();
 
             while (!answer.equals("!quit")) {
                 Long startSearchTime = System.currentTimeMillis();
-                data.getKeysByPrefix(answer);
+                Iterable<String> matches = data.getKeysByPrefix(answer);
                 Long finishSearchTime = System.currentTimeMillis();
 
                 int keysCount = 0;
 
-                for (String match : data.getKeysByPrefix(answer)) {
+                for (String match : matches) {
                     System.out.println("<" + match + ">" + "[" + data.getValueByKey(match) + "]");
                     keysCount++;
                 }
@@ -39,7 +38,7 @@ public class Application {
                 System.out.println("Время, затраченное на поиск: " + (finishSearchTime - startSearchTime) + " мс");
 
                 System.out.print("Введите строку: ");
-                answer = scanner.next();
+                answer = scanner.nextLine();
             }
         }
         catch (IOException ex) {

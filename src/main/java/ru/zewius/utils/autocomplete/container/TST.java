@@ -101,13 +101,13 @@ public class TST<V> {
         return x;
     }
 
-    public Iterable<String> keys() {
+    public Queue<String> keys() {
         Queue<String> queue = new ArrayDeque<>();
         collect(root, new StringBuilder(), queue);
         return queue;
     }
 
-    public Iterable<String> keysWithPrefix(String prefix) {
+    public Queue<String> keysWithPrefix(String prefix) {
         if (prefix == null) {
             throw new IllegalArgumentException("calls keysWithPrefix() with null argument");
         }
